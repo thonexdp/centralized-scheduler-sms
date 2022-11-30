@@ -26,20 +26,13 @@ CREATE TABLE `department` (
   `description` varchar(200) DEFAULT NULL,
   `campus` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `department` */
 
 insert  into `department`(`id`,`name`,`description`,`campus`) values 
-(12,'CCSIT','c2022345','mc'),
-(13,'CCSIT',NULL,'toc'),
-(14,'CCSIT45',NULL,'bc'),
-(15,'CCSIT',NULL,'bc'),
-(16,'CCSIT',NULL,'mcc'),
-(17,'CCSIT',NULL,'hc'),
-(18,'CCSIT3',NULL,'bc'),
-(19,'CCSIT45',NULL,'toc'),
-(21,'CCSIT35345',NULL,'mc');
+(12,'CCSIT','c2022345-3','mc'),
+(22,'BSIT','Bachelore',NULL);
 
 /*Table structure for table `employee` */
 
@@ -57,14 +50,58 @@ CREATE TABLE `employee` (
   `itemname` varchar(100) DEFAULT NULL,
   `campus` varchar(50) DEFAULT NULL,
   `photo` text DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `employee` */
 
-insert  into `employee`(`id`,`firstname`,`middlename`,`lastname`,`agencyno`,`department`,`cellno`,`status`,`itemname`,`campus`,`photo`) values 
-(8,'Super',NULL,'Admin',123,NULL,NULL,NULL,NULL,NULL,NULL),
-(9,'Anotni',NULL,'depaz',1,13,'06542132323','Job Order','Clerk','mc',NULL);
+insert  into `employee`(`id`,`firstname`,`middlename`,`lastname`,`agencyno`,`department`,`cellno`,`status`,`itemname`,`campus`,`photo`,`email`) values 
+(27,'james',NULL,'read',123,12,'098765432','Permanent-Faculty','Department Head','mc',NULL,'admin@gmail.com'),
+(28,'ana',NULL,'cruz',124,12,'098765432','Permanent-Faculty','Department Head','mc',NULL,'admin@gmail.com'),
+(29,'Admin',NULL,'Admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+
+/*Table structure for table `meeting` */
+
+DROP TABLE IF EXISTS `meeting`;
+
+CREATE TABLE `meeting` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `topic` text DEFAULT NULL,
+  `date` varchar(50) DEFAULT NULL,
+  `timestart` time DEFAULT NULL,
+  `timend` time DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `duration` varchar(50) DEFAULT NULL,
+  `addedby` int(10) DEFAULT NULL,
+  `venue` text DEFAULT NULL,
+  `active` int(2) DEFAULT 1,
+  `link` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `meeting` */
+
+insert  into `meeting`(`id`,`description`,`topic`,`date`,`timestart`,`timend`,`type`,`duration`,`addedby`,`venue`,`active`,`link`) values 
+(16,'Meeting 1','No Topic','2022-12-10','07:00:00','10:00:00','Virtual',NULL,0,NULL,1,'http://localhost:8000/meeting');
+
+/*Table structure for table `participants` */
+
+DROP TABLE IF EXISTS `participants`;
+
+CREATE TABLE `participants` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `empid` int(10) DEFAULT NULL,
+  `meetingId` int(10) DEFAULT NULL,
+  `active` int(2) DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `participants` */
+
+insert  into `participants`(`id`,`empid`,`meetingId`,`active`) values 
+(42,27,16,1);
 
 /*Table structure for table `users` */
 
@@ -77,13 +114,14 @@ CREATE TABLE `users` (
   `password` text DEFAULT NULL COMMENT 'admin123',
   `role` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`empid`,`username`,`password`,`role`) values 
-(2,8,'admin123','$2y$10$QS2vdK0Yq9OietQs4WAXhuA8HyTvyQLbvGH9WGSf51Z7Q8QQpWKNG','sadmin'),
-(3,9,'depaz1','$2y$10$jvYyhiOfOYxAquGAN58otOiiK0ejKrGW1xLm.wWhFSASshQZ54Oie','clerk');
+(2,29,'admin123','$2y$10$QS2vdK0Yq9OietQs4WAXhuA8HyTvyQLbvGH9WGSf51Z7Q8QQpWKNG','sadmin'),
+(21,27,'read123','$2y$10$LV8pr3uL9K5JDexxfrJEk.zMY8VabxNoMi4hFyQ..YmGccbbGVwOa','clerk'),
+(22,28,'cruz124','$2y$10$7Nr7ctu/d0/jh061V.VJNeFwcNYsIImL0ZqavpRzJ3DEuGz9LBSw2','department head');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
