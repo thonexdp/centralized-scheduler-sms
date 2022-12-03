@@ -5,7 +5,7 @@ $(document).ready(function () {
   $('.thirdDiv').hide();
   $('.venue').hide();
 
-
+  var isVenueType = false;
   $('.allstatus').hide();
   
   $.ajaxSetup({
@@ -13,6 +13,7 @@ $(document).ready(function () {
   })
   $(document).on("click", ".add-meeting", function () {
     $('#meeting-form').find('input[name="id"]').val('');
+    $('#meeting-form')[0].reset();
     $('#meetingModal').modal('show')
 
   })
@@ -25,7 +26,9 @@ $(document).ready(function () {
      // $('input[name="venue"]').attr('name', 'link');
       $('.div-venue').hide();
       $('.div-link').show();
+      isVenueType = false;
     }else{
+      isVenueType = true;
       $('.div-venue').show();
       $('.div-link').hide();
      // $('.venue-link').text('Venue')
@@ -85,21 +88,21 @@ $(document).ready(function () {
   })
   $('input[name="venue"]').on('input', function() {
     var date = $('#meeting-form').find('input[name="meetingdate"]').val();
-    var duration = $('#meeting-form').find('select[name="duration"]').val();
-        getVenue(date,duration)
+  //  var duration = $('#meeting-form').find('select[name="duration"]').val();
+        getVenue(date)
 
   })
   $('input[name="meetingdate"]').on('input', function() {
     var date = $('#meeting-form').find('input[name="meetingdate"]').val();
-    var duration = $('#meeting-form').find('select[name="duration"]').val();
-        getVenue(date,duration)
+  //  var duration = $('#meeting-form').find('select[name="duration"]').val();
+        getVenue(date)
 
   })
 
   $('select[name="duration"]').on('input', function() {
     var date = $('#meeting-form').find('input[name="meetingdate"]').val();
-    var duration = $('#meeting-form').find('select[name="duration"]').val();
-        getVenue(date,duration)
+  //  var duration = $('#meeting-form').find('select[name="duration"]').val();
+        getVenue(date)
 
   })
 
@@ -221,11 +224,12 @@ $(document).ready(function () {
   }
 
   function getVenue(date,duration){
+    if(isVenueType){
     $.ajax({
       url: '/meeting/getvenue',
       type: 'post',
       data: {
-        date,duration
+        date
         },
       dataType: 'json',
       beforeSend:function(){
@@ -233,14 +237,14 @@ $(document).ready(function () {
          // $('.loading-select').html('<i class="spinner-border spinner-border-sm"></i> Loading... ');
       },
       success:function(result){
-        // console.log(result);
+       console.log('venue:',result);
       if(result.status == 200){
         $('.venueReserved').html('')
         result.data.forEach(function(item) {
           if(item.venue){
-            $('.venueReserved').html(' <h6 class="text-info mt-1">Venue Reserved List')
+            $('.venueReserved').html(' <h6 class="text-info mt-2">Venue Reserved List')
             $('.venueReserved').append('<div class="text-danger">\
-            <span><i class="ri-map-pin-2-line"></i> '+item.venue+'</span>\
+            <span><i class="ri-map-pin-2-line"></i> '+item.venue+' <i> <small class="text-danger"> : '+item.timestart+'-'+item.timend+' </small> </i> </span>\
           </div>');
           }
           
@@ -250,6 +254,7 @@ $(document).ready(function () {
        
       }
     })
+    }
   }
   $(document).on("click", ".btn-delete-meeting" , function(e) {
     e.preventDefault();

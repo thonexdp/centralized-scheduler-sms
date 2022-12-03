@@ -115,7 +115,7 @@ function getInfo(id){
          // $('#employee-form').find('select[name="campus"]').val(result.data.campus).change();
           $('#employee-form').find('input[name="cellno"]').val(result.data.cellno);
           $('#employee-form').find('input[name="email"]').val(result.data.email);
-          $('#employee-form').find('select[name="status"]').val(result.data.status).change();
+          // $('#employee-form').find('select[name="status"]').val(result.data.status).change();
           $('#employee-form').find('select[name="itemname"]').val(result.data.itemname).change();
           if(result.data.photo){
             $('.loadImageSrc').attr('src', url+"/storage/"+result.data.photo );
@@ -165,7 +165,7 @@ $('#employee-table').DataTable({
       {data: 'department', name: 'department'},
       {data: 'cellno', name: 'cellno'},
       {data: 'email', name: 'email'},
-      {data: 'status', name: 'status'},
+      // {data: 'status', name: 'status'},
       {data: 'itemname', name: 'itemname'},
       {data: 'action', name: 'action'},
       ],

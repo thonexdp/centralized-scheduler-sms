@@ -60,7 +60,7 @@ class EmployeeController extends Controller
             'lastname' => 'required',
             'department' => 'required',
             'agencyno' => 'unique:employee,agencyno,' . $request->id,
-            'status' => 'required',
+            // 'status' => 'required',
             'cellno' => 'required:unique'
         ],
             [
@@ -92,7 +92,7 @@ class EmployeeController extends Controller
             $save->department = $request->department;
             $save->cellno = $request->cellno;
             $save->email = $request->email;
-            $save->status = $request->status;
+            // $save->status = $request->status;
             $save->itemname = $request->itemname;
             $save->campus = 'mc';
             $save->photo = $request->filepath;
@@ -112,7 +112,7 @@ class EmployeeController extends Controller
             $save->department = $request->department;
             $save->cellno = $request->cellno;
             $save->email = $request->email;
-            $save->status = $request->status;
+            // $save->status = $request->status;
             $save->itemname = $request->itemname;
             $save->campus = 'mc';
             if(!empty($request->filepath)){
@@ -164,7 +164,7 @@ class EmployeeController extends Controller
                     'department'  => $value['department'],
                     'cellno'  => $value['cellno'],
                     'email'  => $value['email'],
-                    'status'  => $value['status'],
+                    // 'status'  => $value['status'],
                     'itemname'  => $value['itemname'],
                     'action'  => ' <div class="btn-group" role="group">
                             <button type="button" class="btn btn-outline-light btn-sm btn-edit-employee" data-id="'.$value['id'].'" > <i class="ri-ball-pen-line text-success mr-2 ml-2"></i> </button>
@@ -187,6 +187,9 @@ class EmployeeController extends Controller
 
 	    $data = base64_decode($image2[1]);
         $filepath = "images/".time().'.png';
+       // $path = "orf_".time().'.'.$request->orf->extension();  
+      // $request->image->move(public_path('storage/images'), $filepath);
+
         Storage::disk('public')->put($filepath, $data);
         return response()->json(['status' => 200, 'path' => $filepath]);
 

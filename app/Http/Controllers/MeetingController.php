@@ -435,13 +435,21 @@ if(sizeof($participants) == 0){
     public function getvenue(Request $request)
     {
         $date = $request->date;
-        $duration = $request->duration;
-        if (!empty($date) and !empty($duration)) {
-            $meeting = Meetings::where('date', $date)->where('duration', $duration)->get();
+      //  $duration = $request->duration;
+      $dataResult = new Collection();
+        if (!empty($date)) {
+            $meeting = Meetings::where('date', $date)->get();
             if ($meeting) {
+                foreach($meeting as $data){
+                    $dataResult->push([
+                        'venue' => $data['venue'],
+                        'timestart' => empty($data['timestart'])?'':Carbon::parse($data['timestart'])->format('H:i A'),
+                        'timend' => empty($data['timend'])?'':Carbon::parse($data['timend'])->format('H:i A'),
+                    ]);
+                }
                 return response()->json([
                     'status' => 200,
-                    'data' => $meeting
+                    'data' => $dataResult
                 ]);
             }
         }

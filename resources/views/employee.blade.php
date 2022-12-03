@@ -39,7 +39,7 @@
                     <th scope="col">Department</th>
                     <th scope="col">CellNo</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Status</th>
+                    {{-- <th scope="col">Status</th> --}}
                     <th scope="col">ItemName</th>
                     <th scope="col"></th>
                   </tr>
@@ -72,7 +72,7 @@
                     <div class="row">
                         <div class="class-col-md-12">
                           <div id="uploadedimage">
-                            <img style="border-radius: 20px; border: 2px solid black;" width="150" class="avatar border-white loadImageSrc" src="{{asset('assets/images/profile1.jpg')}}" alt="..." />
+                            <img style="border-radius: 20px; border: 2px solid black;" width="100" class="avatar border-white loadImageSrc" src="{{asset('assets/images/profile1.jpg')}}" alt="..." />
                           </div>
                           <!--  <form method="post" enctype="multipart/form-data">  -->
 
@@ -139,24 +139,24 @@
                             <span class="text-danger email_error"></span>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                           <label for="basic-url" class="form-label">Status</label>
                           <div class="input-group-sm mb-1">
                             <select class="form-control" name="status">
                               <option value="">Select</option>
-                              <?php $status = $global->status() ?>
+                              <?php //$status = $global->status() ?>
                               @foreach($status as $item)
                                <option value="{{$item}}">{{$item}}</option>
                               @endforeach
                             </select>
                             <span class="text-danger status_error"></span>
                           </div>
-                        </div>
-                        <div class="col-md-6">
+                        </div> --}}
+                        <div class="col-md-12">
                           <label for="basic-url" class="form-label">ItemName</label>
                           <div class="input-group-sm mb-2">
                             <select class="form-control" name="itemname">
-                              <option value="">Select</option>
+                              <option value="" disabled selected>Select</option>
                               <?php $itemname = $global->itemName() ?>
                               @foreach($itemname as $item)
                                <option value="{{$item}}">{{$item}}</option>
@@ -166,7 +166,7 @@
                           </div>
                         </div>
                         <div class="col-md-12">
-                          <div class="col-md-12 mt-2 alertmessage"></div>
+                          <div class="mt-1 alertmessage"></div>
                         </div>
                     </div>
                   </div>

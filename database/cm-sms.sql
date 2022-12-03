@@ -32,7 +32,7 @@ CREATE TABLE `department` (
 
 insert  into `department`(`id`,`name`,`description`,`campus`) values 
 (12,'CCSIT','c2022345-3','mc'),
-(22,'BSIT','Bachelore',NULL);
+(22,'BSIT','Bachelor',NULL);
 
 /*Table structure for table `employee` */
 
@@ -52,14 +52,16 @@ CREATE TABLE `employee` (
   `photo` text DEFAULT NULL,
   `email` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `employee` */
 
 insert  into `employee`(`id`,`firstname`,`middlename`,`lastname`,`agencyno`,`department`,`cellno`,`status`,`itemname`,`campus`,`photo`,`email`) values 
 (27,'james',NULL,'read',123,12,'098765432','Permanent-Faculty','Department Head','mc',NULL,'admin@gmail.com'),
 (28,'ana',NULL,'cruz',124,12,'098765432','Permanent-Faculty','Department Head','mc',NULL,'admin@gmail.com'),
-(29,'Admin',NULL,'Admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+(29,'Admin',NULL,'Admin',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(30,'Clerk',NULL,'Clerk',111,12,'09876432',NULL,'Clerk','mc','images/1670069517.png','admin@gmail.com'),
+(31,'instructor',NULL,'instructor',2222,12,'098765432',NULL,'Instructor','mc','images/1670069600.png','admin@gmail.com');
 
 /*Table structure for table `meeting` */
 
@@ -79,12 +81,14 @@ CREATE TABLE `meeting` (
   `active` int(2) DEFAULT 1,
   `link` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `meeting` */
 
 insert  into `meeting`(`id`,`description`,`topic`,`date`,`timestart`,`timend`,`type`,`duration`,`addedby`,`venue`,`active`,`link`) values 
-(16,'Meeting 1','No Topic','2022-12-10','07:00:00','10:00:00','Virtual',NULL,0,NULL,1,'http://localhost:8000/meeting');
+(16,'Meeting 1','No Topic','2022-12-10','07:00:00','10:00:00','Virtual',NULL,0,NULL,1,'http://localhost:8000/meeting'),
+(17,'Meting 01','topic','2022-12-03','07:00:00','09:30:00','In-Person',NULL,0,'Plenary Mpc',1,NULL),
+(18,'New Meeting','No Topic','2022-12-03','08:00:00','09:00:00','In-Person',NULL,0,'Plenary',1,NULL);
 
 /*Table structure for table `participants` */
 
@@ -96,12 +100,17 @@ CREATE TABLE `participants` (
   `meetingId` int(10) DEFAULT NULL,
   `active` int(2) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `participants` */
 
 insert  into `participants`(`id`,`empid`,`meetingId`,`active`) values 
-(42,27,16,1);
+(42,27,16,1),
+(43,31,18,1),
+(45,30,18,1),
+(46,28,18,1),
+(47,30,17,1),
+(48,31,17,1);
 
 /*Table structure for table `users` */
 
@@ -114,14 +123,16 @@ CREATE TABLE `users` (
   `password` text DEFAULT NULL COMMENT 'admin123',
   `role` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`empid`,`username`,`password`,`role`) values 
 (2,29,'admin123','$2y$10$QS2vdK0Yq9OietQs4WAXhuA8HyTvyQLbvGH9WGSf51Z7Q8QQpWKNG','sadmin'),
 (21,27,'read123','$2y$10$LV8pr3uL9K5JDexxfrJEk.zMY8VabxNoMi4hFyQ..YmGccbbGVwOa','clerk'),
-(22,28,'cruz124','$2y$10$7Nr7ctu/d0/jh061V.VJNeFwcNYsIImL0ZqavpRzJ3DEuGz9LBSw2','department head');
+(22,28,'cruz124','$2y$10$7Nr7ctu/d0/jh061V.VJNeFwcNYsIImL0ZqavpRzJ3DEuGz9LBSw2','department head'),
+(23,30,'clerk111','$2y$10$aBNCJtgLhtq6OlOzkrDuxeDKXtoQOjrVrw3dwKi/QPmTIMN/Ad4yC','clerk'),
+(24,31,'instructor2222','$2y$10$gqeh2gIM3Uc5VqT8wnxH1.WMbsqtoEy6QYKeBxO9Jmqhf9t/MZ62K','instructor');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
