@@ -363,7 +363,15 @@ class MeetingController extends Controller
     {
         try {
             #nextmo register
-            $basic  = new \Nexmo\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
+            
+            /*  key #1  */
+            $key = getenv("NEXMO_KEY"); 
+            $secret = getenv("NEXMO_SECRET");
+
+
+
+
+            $basic  = new \Nexmo\Client\Credentials\Basic($key,$secret);
             $client = new \Nexmo\Client($basic);
 
 
