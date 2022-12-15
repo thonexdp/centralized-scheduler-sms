@@ -147,7 +147,7 @@ class EmployeeController extends Controller
     public function show(Request $request)
     {
         $dataResult = new Collection();
-        $employee = Employee::orderBy('lastname')->get();
+        $employee = Employee::whereNotNull('agencyno')->orderBy('lastname')->get();
        if(sizeof($employee) == 0){
         return Datatables::of($dataResult)->make(true);
        }

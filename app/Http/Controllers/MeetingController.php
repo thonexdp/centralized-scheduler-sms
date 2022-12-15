@@ -295,6 +295,7 @@ class MeetingController extends Controller
         $dataArr = array();
         $empid = session('userid');
         $participants = Participants::where('empid', $empid)->get();
+       
         $dataArray->push([
             'title' => 'Today',
             'start' => date('Y-m-d'),
@@ -361,6 +362,7 @@ class MeetingController extends Controller
     public function send_sms(Request $request)
     {
         try {
+            #nextmo register
             $basic  = new \Nexmo\Client\Credentials\Basic(getenv("NEXMO_KEY"), getenv("NEXMO_SECRET"));
             $client = new \Nexmo\Client($basic);
 
@@ -368,40 +370,42 @@ class MeetingController extends Controller
             $meetingID = $request->meeting_id;
             $participants = Participants::where('meetingId',$meetingID)->get();
 
-if(sizeof($participants) == 0){
-    return response()->json(['status' => 400, 'message' => 'Message Not Sent']);
-}
-       $num = array();
-       $isSend = false;
-            foreach ($participants as $value) {
-               if(!empty($value->Employee) ){
-                    if(!empty($value->Employee['cellno'])){
-                        if(strlen($value->Employee['cellno']) == 10){
-                            $firstChar = substr($value->Employee['cellno'], 0, 1);
-                            if($firstChar == '9'){
-                                $receiverNumber = "63".$value->Employee['cellno'];
-                                if(!empty($value->Meeting)){
-                                    $message = "There will have a meeting for ".$value->Meeting['description']." on ".$value->Meeting['date'];
-                                }
-                               // array_push($num,$value->Employee['cellno'] );
-                               $message = $client->message()->send([
-                                'to' => $receiverNumber,
-                                'from' => "CM_SMS",
-                                'text' => $message
-                            ]);
-                            $isSend = true;
-                            }
-                        }
-                    }
-               }
+            if(sizeof($participants) == 0){
+                return response()->json(['status' => 400, 'message' => 'Message Not Sent']);
             }
+                $num = array();
+                $isSend = false;
+                        foreach ($participants as $value) {
+                        if(!empty($value->Employee) ){
+                                if(!empty($value->Employee['cellno'])){
+                                    if(strlen($value->Employee['cellno']) == 10){
+                                        $firstChar = substr($value->Employee['cellno'], 0, 1);
+                                        if($firstChar == '9'){
+                                            $receiverNumber = "63".$value->Employee['cellno'];
+                                            if(!empty($value->Meeting)){
+                                                $message = "There will have a meeting for ".$value->Meeting['description']." on ".$value->Meeting['date'];
+                                            }
+                                        // array_push($num,$value->Employee['cellno'] );
+                                      //  dd( $receiverNumber);
+                                       
+                                        $message = $client->message()->send([
+                                            'to' => $receiverNumber,
+                                            'from' => "CM_SMS",
+                                            'text' => $message
+                                        ]);
+                                        $isSend = true;
+                                        }
+                                    }
+                                }
+                        }
+                        }
 
-        dd($num);
+                   // dd($isSend);
     
         if($isSend){
             return response()->json(['status' => 200, 'message' => 'Message Sent Success']);
         }
-        return response()->json(['status' => 400, 'message' => 'Message Not Sent']);
+        return response()->json(['status' => 400, 'message' => 'Message Not Sent!Please try again!']);
               //code...
             } catch (\Throwable $th) {
                 return response()->json(['status' => 500, 'message' => 'Error MSG Not Sent',$th]);
