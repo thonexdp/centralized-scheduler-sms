@@ -139,8 +139,9 @@
                 <input type="hidden" name="id">
                 <div class="card">
                   <div class="card-header justify-content-between align-items-center d-flex">
-                      <h6 class="card-title m-0" style="color: aliceblue">Send Message Notifications to the participants!</h6>
+                      <h6 class="card-title text-center m-0" style="color: aliceblue">Send Message Notifications to the participants!</h6>
                   </div>
+                  <center><small class="text-danger"> <b>Note:</b> <i> Only for valid numbers will received the message! </i>  </small></center> 
                   <div class="card-body" style=" display: none">
                         <div class="row">
                           <div class="col-md-6">

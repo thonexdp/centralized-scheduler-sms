@@ -102,20 +102,22 @@ $(document).ready(function () {
         },
         success:function(data){
           console.log(data);
-            if(data.status === 200){
+            if(data.status == 200){
               swal({
                 title: "Success!",
                 text: data.message,
                 icon: "success",
                 button: "okay!",
               });
+            }else{
+              swal({
+                title: "Error!",
+                text: data.message,
+                icon: "error",
+                button: "okay!",
+              });
             }
-            swal({
-              title: "Error!",
-              text: data.message,
-              icon: "error",
-              button: "okay!",
-            });
+          
             $('#sendMsgModal').modal('hide');
             $('.btn-sendsms').html('<i class="ri-send-plane-fill"></i> Send Now');
 
