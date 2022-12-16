@@ -372,6 +372,8 @@ class MeetingController extends Controller
             $key = getenv("NEXMO_KEY_SECOND"); 
             $secret = getenv("NEXMO_SECRET_SECOND");
 
+            
+
 
 
             $basic  = new \Nexmo\Client\Credentials\Basic($key,$secret);
