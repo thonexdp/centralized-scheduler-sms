@@ -363,12 +363,14 @@ class MeetingController extends Controller
     {
         try {
             #nextmo register
-            
+
             /*  key #1  */
             $key = getenv("NEXMO_KEY"); 
             $secret = getenv("NEXMO_SECRET");
 
-
+               /*  key #2  */
+               $key = getenv("NEXMO_KEY2"); 
+               $secret = getenv("NEXMO_SECRET2");
 
 
             $basic  = new \Nexmo\Client\Credentials\Basic($key,$secret);
@@ -398,7 +400,7 @@ class MeetingController extends Controller
                                        
                                         $message = $client->message()->send([
                                             'to' => $receiverNumber,
-                                            'from' => "CM_SMS",
+                                            'from' => "SLSU_CM_SMS",
                                             'text' => $message
                                         ]);
                                         $isSend = true;
