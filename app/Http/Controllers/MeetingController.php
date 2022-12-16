@@ -365,12 +365,13 @@ class MeetingController extends Controller
             #nextmo register
 
             /*  key #1  */
-            $key = getenv("NEXMO_KEY"); 
-            $secret = getenv("NEXMO_SECRET");
+            // $key = getenv("NEXMO_KEY"); 
+            // $secret = getenv("NEXMO_SECRET");
 
                /*  key #2  */
-               $key = getenv("NEXMO_KEY2"); 
-               $secret = getenv("NEXMO_SECRET2");
+            $key = getenv("NEXMO_KEY_SECOND"); 
+            $secret = getenv("NEXMO_SECRET_SECOND");
+
 
 
             $basic  = new \Nexmo\Client\Credentials\Basic($key,$secret);
@@ -379,9 +380,8 @@ class MeetingController extends Controller
 
             $meetingID = $request->meeting_id;
             $participants = Participants::where('meetingId',$meetingID)->get();
-
             if(sizeof($participants) == 0){
-                return response()->json(['status' => 400, 'message' => 'Message Not Sent']);
+                return response()->json(['status' => 400, 'message' => 'Participants not found!']);
             }
                 $num = array();
                 $isSend = false;
@@ -393,7 +393,7 @@ class MeetingController extends Controller
                                         if($firstChar == '9'){
                                             $receiverNumber = "63".$value->Employee['cellno'];
                                             if(!empty($value->Meeting)){
-                                                $message = "There will have a meeting for ".$value->Meeting['description']." on ".$value->Meeting['date'];
+                                                $message = "There will have a meeting for ".$value->Meeting['description']." on ".$value->Meeting['date']. "| Time: ".$value->Meeting['timestart']." - ".$value->Meeting['timend'];
                                             }
                                         // array_push($num,$value->Employee['cellno'] );
                                       //  dd( $receiverNumber);
@@ -415,10 +415,10 @@ class MeetingController extends Controller
         if($isSend){
             return response()->json(['status' => 200, 'message' => 'Message Sent Success']);
         }
-        return response()->json(['status' => 400, 'message' => 'Message Not Sent!Please try again!']);
+        return response()->json(['status' => 400, 'message' => 'Message not Sent! NO valid Number Found!']);
               //code...
             } catch (\Throwable $th) {
-                return response()->json(['status' => 500, 'message' => 'Error MSG Not Sent',$th]);
+                return response()->json(['status' => 500, 'message' => 'Error MSG Not Sent'.$th]);
             }
 
     }
