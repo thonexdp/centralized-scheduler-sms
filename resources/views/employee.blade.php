@@ -126,9 +126,9 @@
                         </div>
                         
                         <div class="col-md-6">
-                          <label for="basic-url" class="form-label">CellNo.</label>
+                          <label for="basic-url" class="form-label">CellNo. <i class="text-info"> <small> Enter 10 digit (start in 9. eg.91234567890)</small></i></label>
                           <div class="input-group-sm mb-2">
-                            <input type="text" class="form-control" name="cellno" id="basic-url">
+                            <input type="text" class="form-control" name="cellno"  placeholder="+63" id="basic-url">
                             <span class="text-danger cellno_error"></span>
                           </div>
                         </div>
