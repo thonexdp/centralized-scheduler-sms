@@ -24,6 +24,7 @@ Route::get('/', [AuthController::class, 'index']);
         
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/processlogin', [AuthController::class, 'login']);
+Route::post('/update_profile', [AuthController::class, 'update_profile']);
 
 Route::group(['prefix' => 'department','middleware' => ['isauth']], function() {
     Route::get('/', [DepartmentController::class, 'index']);

@@ -14,6 +14,26 @@ class AuthController extends Controller
         }
         return view('login');
     }
+    public function update_profile(Request $request){
+        
+        $id = $request->id;
+        $username = $request->username;
+        $password = $request->password;
+
+         $users = Users::find($id);
+         if( $users){
+            $users->username = $username;
+            if(!empty($password)){
+                $users->password = Hash::make($password);
+            }
+            $users->update();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Account Updated Success!'
+            ]);
+         }
+
+    }
     public function login(Request $request){
         $username = strtolower($request->username);
         $password =  $request->password;
@@ -24,6 +44,8 @@ class AuthController extends Controller
                     'name' => ucwords($findEmployee->employee['firstname'])." ". ucwords($findEmployee->employee['lastname']) ,
                     'userid' => $findEmployee->employee['id'],
                     'userole' => $findEmployee->role,
+                    'id' => $findEmployee->id,
+                    'username' => $findEmployee->username,
                     'photo' => $findEmployee->employee['photo']
                 ]);
                 return response()->json([

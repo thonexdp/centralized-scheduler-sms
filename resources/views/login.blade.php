@@ -58,7 +58,7 @@
     </head>
     <body class="">
         <!-- Main Section-->
-        <section class="d-flex justify-content-center align-items-start vh-100 py-2 px-3 px-md-0">
+        <section style="background-color: #060e4d;" class="d-flex justify-content-center align-items-start vh-100 py-2 px-3 px-md-0">
           <!-- Login Form-->
           <div class="d-flex flex-column w-50 align-items-center">
       
@@ -90,7 +90,7 @@
                   <input type="password" class="form-control form-control-light" name="password" id="login-password" placeholder="Enter your password" required>
                 </div>
                 <div class="form-group alertmessage"></div>
-                <button type="submit" class="btn btn-primary d-block w-100 my-4">Login</button>
+                <button type="submit" class="btn btn-info d-block w-100 my-4">Login</button>
               </form>
               <!-- / Login Form -->
             </div>
