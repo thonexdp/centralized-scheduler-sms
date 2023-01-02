@@ -51,9 +51,9 @@
 
 
         <!-- Breadcrumbs-->
-        <nav class="mb-4 pb-2 border-bottom" aria-label="breadcrumb">
+        <nav class="mb-1 pb-2 border-bottom" aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./index.html"><i class="ri-home-line align-bottom me-1"></i> Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="./index.html"><i class="ri-home-line align-bottom me-1"></i> <b class="text-muted">Dashboard</b> </a></li>
             </ol>
         </nav>            <!-- / Breadcrumbs-->
 
@@ -78,7 +78,7 @@
                             <!-- / Nav Pills-->
                 
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="background-color: #060e4d;">
                             <!-- Tab Content-->
                             <div class="tab-content" id="scheduleTabContent">
                 

@@ -4,21 +4,37 @@
 ?>
 @extends('includes.app')
 @section('content')
-
+<style>
+  tbody {
+    background-color: #f2f2f2;
+    color: #000;
+  }
+  tbody tr td {
+   font-weight: bold;
+  }
+  .maincard {
+    background-color: #f2f2f2; 
+    color: #000; 
+    box-shadow: 5px 5px 5px 5px lightblue;
+  }
+  tr th {
+    color :#000;
+  }
+</style>
         <!-- Breadcrumbs-->
-        <nav class="mb-4 pb-2 border-bottom" aria-label="breadcrumb">
+        <nav class="mb-1 pb-2 border-bottom" aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./index.html"><i class="ri-home-line align-bottom me-1"></i> Employee</a></li>
+              <li class="breadcrumb-item"><a href="./index.html"><i class="ri-home-line align-bottom me-1"></i> <b class="text-muted">Employee</b> </a></li>
             </ol>
         </nav>            <!-- / Breadcrumbs-->
         <!-- Top Row Widgets-->
         <div class="row g-4 mb-4">
 
-          <div class="card mb-4">
+          <div class="card maincard mb-4">
             <div class="card-header">
               <div class="row">
                 <div class="col-md-12">
-                  <button class="btn btn-outline-light btn-sm add-employee"><i class="ri-add-line"></i> Add Employee</button>
+                  <button class="btn btn-outline-success btn-sm add-employee"><i class="ri-add-line"></i> Add Employee</button>
                 </div>
                 
               </div>
@@ -29,7 +45,7 @@
               <h6 class="card-title">Employee List</h6>
               <hr>
               <div class="table-responsive">
-              <table class="table table-striped nowrap" id="employee-table">
+              <table class="table nowrap" id="employee-table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -55,7 +71,7 @@
 
         <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="background-color: #24293b">
+            <div class="modal-content" style="background-color: #060e4d">
               {{-- <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -63,7 +79,7 @@
               <form id="employee-form">
               <div class="modal-body" >
                 <input type="hidden" name="id">
-                <div class="card">
+                <div class="card" style="background-color: #060e4d">
                   <div class="card-header justify-content-between align-items-center d-flex">
                       <h6 class="card-title m-0" style="color: aliceblue">Employee Details</h6>
                   </div>

@@ -3,20 +3,37 @@
 @extends('includes.app')
 <?php $global = new App\Http\Controllers\GlobalVar(); ?>
 @section('content')
+<style>
+  tbody {
+    background-color: #f2f2f2;
+    color: #000;
+  }
+  tbody tr td {
+   font-weight: bold;
+  }
+  .maincard {
+    background-color: #f2f2f2; 
+    color: #000; 
+    box-shadow: 5px 5px 5px 5px lightblue;
+  }
+  tr th {
+    color: #000;
+  }
+</style>
         <!-- Breadcrumbs-->
-        <nav class="mb-4 pb-2 border-bottom" aria-label="breadcrumb">
+        <nav class="mb-1 pb-2 border-bottom" aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="./index.html"><i class="ri-home-line align-bottom me-1"></i> Department</a></li>
+              <li class="breadcrumb-item"><a href="./index.html"><i class="ri-home-line align-bottom me-1"></i> <b class="text-muted">Department</b> </a></li>
             </ol>
         </nav>            <!-- / Breadcrumbs-->
 
         <!-- Top Row Widgets-->
         <div class="row g-4 mb-4">
-          <div class="card mb-4">
+          <div class="card maincard mb-4">
             <div class="card-header">
               <div class="row">
                 <div class="col-md-8">
-                  <button class="btn btn-outline-primary btn-sm add-department">Add Deparment</button>
+                  <button class="btn btn-outline-success btn-sm add-department">Add Deparment</button>
                 </div>
                 {{-- <div class="col-md-4">
                   <select class="form-control float-right select-campus" name="select-campus">
@@ -32,7 +49,7 @@
             <div class="card-body">
               <h6 class="card-title">Deparment List</h6>
               <hr>
-              <table class="table table-striped" id="department-table">
+              <table class="table" id="department-table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -51,7 +68,7 @@
 
         <div class="modal fade" id="departmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-md">
-            <div class="modal-content" style="background-color: #24293b">
+            <div class="modal-content" style="background-color: #060e4d">
               {{-- <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -60,7 +77,7 @@
                 @csrf
               <div class="modal-body" >
                 <input type="hidden" name="id">
-                <div class="card">
+                <div class="card" style="background-color: #060e4d">
                   <div class="card-header justify-content-between align-items-center d-flex">
                       <h6 class="card-title m-0" style="color: aliceblue">Deparment</h6>
                   </div>

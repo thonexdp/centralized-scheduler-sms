@@ -1,7 +1,7 @@
 
 
 
-<aside class="aside bg-dark-700"> 
+<aside class="aside bg-dark-700" style="background-color: #060e4d;"> 
     <div class="simplebar-wrapper">
         <div data-pixr-simplebar>
             <div class="pb-6 pb-sm-0 position-relative">
@@ -45,8 +45,8 @@
                               <i class="ri-settings-2-line"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                              {{-- <li><a class="dropdown-item d-flex align-items-center edit-my-profile" data-id="{{session('userid')}}" href="#"><i class="ri-user-line me-2"></i> Edit
-                                  profile</a></li> --}}
+                                <li><a class="dropdown-item d-flex align-items-center edit-my-profile" data-id="{{session('userid')}}" href="#"><i class="ri-user-line me-2"></i> Edit
+                                    profile</a></li>
                               {{-- <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="ri-settings-2-line me-2"></i> Edit
                                   settings</a></li>
                               <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="ri-mail-open-line me-2"></i> Role {{ session('userole') }}</a></li> --}}
