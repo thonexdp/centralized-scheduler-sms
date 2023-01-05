@@ -11,7 +11,7 @@ use App\Http\Controllers\GlobalVar;
 use App\Models\Participants;
 use Carbon\Carbon;
 use DataTables;
-
+use Twilio\Rest\Client;
 
 class MeetingController extends Controller
 {
@@ -361,6 +361,7 @@ class MeetingController extends Controller
 
     public function send_sms(Request $request)
     {
+
         try {
             #nextmo register
 
