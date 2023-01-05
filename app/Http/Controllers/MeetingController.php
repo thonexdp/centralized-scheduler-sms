@@ -271,9 +271,9 @@ class MeetingController extends Controller
                 'venue'  => $value['type']=="Virtual"?$value['link']:$value['venue'],
                 // 'addedby'  => $value['addedby'],
                 'action'  => ' <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-light btn-sm btn-edit-meeting" data-id="' . $value['id'] . '" > <i class="ri-ball-pen-line text-success mr-2 ml-2"></i> </button>
-                            <button type="button" class="btn btn-outline-light btn-sm btn-delete-meeting" data-id="' . $value['id'] . '"><i class="ri-delete-bin-6-line text-danger mr-2 ml-2"></i></button>
-                            <a  class="btn btn-outline-light btn-sm" href="' . route('meeting.add', ['s' => base64_encode($value['id'])]) . '"><i class="ri-group-line me-3 text-sucess mr-2 ml-2"></i> Participants</a>
+                            <button type="button" class="btn btn-outline-secondary btn-sm btn-edit-meeting" data-id="' . $value['id'] . '" > <i class="ri-ball-pen-line text-success mr-2 ml-2"></i> </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm btn-delete-meeting" data-id="' . $value['id'] . '"><i class="ri-delete-bin-6-line text-danger mr-2 ml-2"></i></button>
+                            <a  class="btn btn-outline-secondary btn-sm" href="' . route('meeting.add', ['s' => base64_encode($value['id'])]) . '"><i class="ri-group-line me-3 text-sucess mr-2 ml-2"></i> Participants</a>
                         </div>',
             ]);
         }
@@ -293,9 +293,20 @@ class MeetingController extends Controller
     {
         $dataArray = new Collection();
         $dataArr = array();
+        $participants  = array();
         $empid = session('userid');
-        $participants = Participants::where('empid', $empid)->get();
+        $role = session('userole');
+        $isAdmin = false;
+        //$participants = Participants::where('empid', $empid)->get();
        
+        $isAdmin = false;
+        if($role == 'sadmin'){
+            $isAdmin = true;
+            $participants = Participants::where('active', 1)->get();
+        }else{
+            $participants = Participants::where('empid', $empid)->get();
+        }
+
         $dataArray->push([
             'title' => 'Today',
             'start' => date('Y-m-d'),
@@ -304,15 +315,31 @@ class MeetingController extends Controller
         if (sizeof($participants) != 0) {
             foreach ($participants as $value) {
                if(Carbon::now()->startOfDay()->lte($value->Meeting['date'])){
-                $dataArray->push([
-                    'title' => $value->Meeting['description'],
-                    'start' => $value->Meeting['date'],
-                ]);
-                $dataArray->push([
-                    'title' => 'Meeting',
-                    'start' => $value->Meeting['date'] . "T" . $value->Meeting['timestart'],  #'2022-11-01T08:01:00'
-                ]);
-                array_push($dataArr, $value->Meeting['description']);
+                if($isAdmin){
+                    if(!$dataArray->contains('meetingId',$value->meetingId)){
+                        $dataArray->push([
+                            'meetingId' => $value->meetingId,
+                            'title' => $value->Meeting['description'],
+                            'start' => $value->Meeting['date'],
+                        ]);
+                        $dataArray->push([
+                            'meetingId' => $value->meetingId,
+                            'title' => 'Meeting',
+                            'start' => $value->Meeting['date'] . "T" . $value->Meeting['timestart'],  #'2022-11-01T08:01:00'
+                        ]);
+                        array_push($dataArr, $value->Meeting['description']);
+                    }
+                }else{
+                    $dataArray->push([
+                        'title' => $value->Meeting['description'],
+                        'start' => $value->Meeting['date'],
+                    ]);
+                    $dataArray->push([
+                        'title' => 'Meeting',
+                        'start' => $value->Meeting['date'] . "T" . $value->Meeting['timestart'],  #'2022-11-01T08:01:00'
+                    ]);
+                    array_push($dataArr, $value->Meeting['description']);
+                }
               }
             }
         }
@@ -362,6 +389,28 @@ class MeetingController extends Controller
     public function send_sms(Request $request)
     {
 
+        // $receiverNumber = "09518226035";
+        // $message = "This is testing from ItSolutionStuff.com";
+  
+        // try {
+  
+        //     $account_sid = getenv("TWILIO_SID");
+        //     $auth_token = getenv("TWILIO_TOKEN");
+        //     $twilio_number = getenv("TWILIO_FROM");
+  
+        //     $client = new Client($account_sid, $auth_token);
+        //     $client->messages->create($receiverNumber, [
+        //         'from' => $twilio_number, 
+        //         'body' => $message]);
+  
+        //     dd('SMS Sent Successfully.');
+  
+        // } catch (\Exception $e) {
+        //     dd("Error: ". $e->getMessage());
+        // }
+
+
+
         try {
             #nextmo register
 
@@ -372,7 +421,6 @@ class MeetingController extends Controller
                /*  key #2  */
             $key = getenv("NEXMO_KEY_SECOND"); 
             $secret = getenv("NEXMO_SECRET_SECOND");
-
             $basic  = new \Nexmo\Client\Credentials\Basic($key,$secret);
             $client = new \Nexmo\Client($basic);
 

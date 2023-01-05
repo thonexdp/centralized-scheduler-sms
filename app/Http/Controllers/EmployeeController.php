@@ -61,7 +61,9 @@ class EmployeeController extends Controller
             'department' => 'required',
             'agencyno' => 'unique:employee,agencyno,' . $request->id,
             // 'status' => 'required',
-            'cellno' => 'required:unique'
+            'cellno' => 'required:unique',
+            'email' => 'required:unique',
+            'itemname' => 'required'
         ],
             [
                'required'  => 'This field is required'
@@ -161,14 +163,14 @@ class EmployeeController extends Controller
                     'photo'  => ' <img src="'.$url.'" alt="photo" width="60">',
                     'name'  => ucwords($value['lastname']).",  ". ucwords($value['firstname'])." ".ucwords(empty($value['middlename'])?'':$value['middlename'][0]."."),
                     'agencyno'  => $value['agencyno'],
-                    'department'  => $value['department'],
+                    'department'  => empty( $value['Department'])?'':$value['Department']['name'],
                     'cellno'  => $value['cellno'],
                     'email'  => $value['email'],
                     // 'status'  => $value['status'],
                     'itemname'  => $value['itemname'],
                     'action'  => ' <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-light btn-sm btn-edit-employee" data-id="'.$value['id'].'" > <i class="ri-ball-pen-line text-success mr-2 ml-2"></i> </button>
-                            <button type="button" class="btn btn-outline-light btn-sm btn-delete-employee" data-id="'.$value['id'].'"><i class="ri-delete-bin-6-line text-danger mr-2 ml-2"></i></button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm btn-edit-employee" data-id="'.$value['id'].'" > <i class="ri-ball-pen-line text-success mr-2 ml-2"></i> </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm btn-delete-employee" data-id="'.$value['id'].'"><i class="ri-delete-bin-6-line text-danger mr-2 ml-2"></i></button>
                         </div>',
                 ]);
          //   }

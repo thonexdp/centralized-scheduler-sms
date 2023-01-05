@@ -24,9 +24,29 @@ $(document).ready(function () {
    const meetingempid = $(this).val();
    meetingIdEmployee  = meetingempid
    $('#participantsemployee-table').DataTable().ajax.reload();
-
+   meeting_des(meetingempid);
   })
 
+  function meeting_des(id){
+    $.ajax({
+      url: '/meeting/one',
+      type: 'post',
+      cache: false,
+      data: { id },
+      success: function (result) {
+        console.log('res:',result);
+        if (result.status == 200) {
+          $('#meeting-des').text(result.data.description);
+          $('#meeting-datetime').text(result.data.date+" / "+result.data.timestart+"-"+result.data.timend);
+          $('#meeting-venue').text(result.data.venue?result.data.venue:'');
+        }else{
+          $('#meeting-des').text('');
+          $('#meeting-datetime').text('');
+          $('#meeting-venue').text('');
+        }
+      }
+      });
+  }
   
 
   $(document).on("click", ".send-msg", function (e) {
@@ -274,8 +294,8 @@ $(document).ready(function () {
     columns: [
       { data: 'photo', name: 'photo' },
       { data: 'name', name: 'name' },
-      { data: 'status', name: 'status' },
-      { data: 'time', name: 'time' },
+      // { data: 'status', name: 'status' },
+      // { data: 'time', name: 'time' },
       { data: 'department', name: 'department' },
     ],
     error: function (err) {

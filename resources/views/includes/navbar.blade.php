@@ -1,5 +1,5 @@
    <!-- Navbar-->
-   <nav class="navbar navbar-expand-lg navbar-light border-0 py-0 fixed-top bg-dark-800">
+   <nav class="navbar navbar-expand-lg navbar-light border-0 py-0 fixed-top bg-dark-800" style="background-color: #060e4d;">
     <div class="container-fluid">
       <div class="d-flex justify-content-between align-items-center flex-grow-1 navbar-actions">
   
