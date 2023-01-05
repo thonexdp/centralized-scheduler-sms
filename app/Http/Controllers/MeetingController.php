@@ -388,6 +388,7 @@ class MeetingController extends Controller
 
     public function send_sms(Request $request)
     {
+
         // $receiverNumber = "09518226035";
         // $message = "This is testing from ItSolutionStuff.com";
   
@@ -409,18 +410,17 @@ class MeetingController extends Controller
         // }
 
 
+
         try {
             #nextmo register
 
             /*  key #1  */
             // $key = getenv("NEXMO_KEY"); 
-            // $secret = getenv("NEXMO_SECRET");
+            // $secret = getenv("NEXMO_SECRETgit ");
 
                /*  key #2  */
             $key = getenv("NEXMO_KEY_SECOND"); 
             $secret = getenv("NEXMO_SECRET_SECOND");
-
-            
             $basic  = new \Nexmo\Client\Credentials\Basic($key,$secret);
             $client = new \Nexmo\Client($basic);
 
