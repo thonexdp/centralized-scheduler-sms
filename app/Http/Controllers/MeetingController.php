@@ -439,12 +439,12 @@ class MeetingController extends Controller
                                         $firstChar = substr($value->Employee['cellno'], 0, 1);
                                         if($firstChar == '9'){
                                             $receiverNumber = "63".$value->Employee['cellno'];
+                                            $linkVenue = empty($value->Meeting['venue'])?$value->Meeting['link'] : $value->Meeting['venue'];
                                             if(!empty($value->Meeting)){
-                                                $message = "There will have a meeting for ".$value->Meeting['description']." on ".$value->Meeting['date']. "| Time: ".$value->Meeting['timestart']." - ".$value->Meeting['timend'];
+                                                $message = "Hello ".$value->Employee['firstname']." ".$value->Employee['lastname']."! There will have a meeting for ".$value->Meeting['description']." on ".$value->Meeting['date']. "| Time: ".$value->Meeting['timestart']." - ".$value->Meeting['timend']." / ".$linkVenue;
                                             }
                                         // array_push($num,$value->Employee['cellno'] );
                                       //  dd( $receiverNumber);
-                                       
                                         $message = $client->message()->send([
                                             'to' => $receiverNumber,
                                             'from' => "SLSU_CM_SMS",
