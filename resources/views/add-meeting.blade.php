@@ -15,6 +15,7 @@
   }
   tbody tr td {
    font-weight: bold;
+   color: #000;
   }
   .maincard {
     background-color: #f2f2f2; 
@@ -37,7 +38,7 @@
 
           <div class="card maincard">
             <div class="card-header justify-content-between align-items-center d-flex">
-                <h5 class="card-title m-0" style="color: aliceblue">Meeting Details</h5>
+                <h5 class="card-title m-0">Meeting Details</h5>
                 <a href="/meeting" class="btn btn-outline-primary btn-sm"><i class="ri-arrow-left-line"></i> Back</a>
             </div>
             <div class="card-body">
@@ -66,7 +67,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-md-6">
-                      <label for="basic-url" class="form-label">Designation</label>
+                      <label for="basic-url" class="form-label" style="color: #000;">Designation</label>
                       <div class="input-group-sm mb-2 ">
                         <select class="form-control status-c" >
                           <option value="">All</option>
@@ -77,7 +78,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label for="basic-url" class="form-label">Department</label>
+                    <label for="basic-url" class="form-label" style="color: #000;">Department</label>
                     <div class="input-group-sm mb-2 ">
                       <select class="form-control department-c">
                         <option value="">All</option>
