@@ -13,6 +13,7 @@
   }
   tbody tr td {
    font-weight: bold;
+   color: #000;
   }
   .maincard {
     background-color: #f2f2f2; 
